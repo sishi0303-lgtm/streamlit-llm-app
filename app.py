@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import streamlit as st
 
 import langchain.chat_models 
-import langchain.schema
 
 # load environment variables
 load_dotenv()
