@@ -2,9 +2,9 @@ import os
 from dotenv import load_dotenv
 
 import streamlit as st
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage, HumanMessage
 
-import langchain.chat_models 
-import langchain.schema
 # load environment variables
 load_dotenv()
 
@@ -12,7 +12,7 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # initialize LLM once at startup
-llm = langchain.chat_models.ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 
 def ask_llm(user_input: str, expert: str) -> str:
@@ -30,8 +30,8 @@ def ask_llm(user_input: str, expert: str) -> str:
         )
 
     messages = [
-        langchain.schema.SystemMessage(content=system_msg),
-        langchain.schema.HumanMessage(content=user_input),
+        SystemMessage(content=system_msg),
+        HumanMessage(content=user_input),
     ]
 
     response = llm.invoke(messages)
